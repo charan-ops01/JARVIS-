@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#050b14;color:#e7faff;
+ font-family:Arial,sans-serif;text-align:center;
+}
+header{padding:25px;color:#42eaff;letter-spacing:5px}
+h1{font-size:35px;text-shadow:0 0 15px #00cfff}
+.status{color:#51f5bc;font-size:13px}
+.circle{
+ width:190px;height:190px;border-radius:50%;
+ border:3px solid #19dfff;margin:45px auto;
+ display:flex;align-items:center;justify-content:center;
+ box-shadow:0 0 25px #00cfff,inset 0 0 25px #00cfff;
+}
+.core{font-size:55px;color:#53eaff}
+button{
+ background:#071d2b;color:#4deaff;
+ border:1px solid #22dfff;border-radius:12px;
+ padding:15px 25px;margin:10px;font-size:16px;
+}
+button:active{background:#12445a}
+#chat{
+ margin:25px 15px;padding:15px;
+ border:1px solid #17617b;border-radius:12px;
+ min-height:100px;text-align:left;
+}
+input{
+ width:65%;padding:14px;border-radius:10px;
+ background:#101e2a;color:white;border:1px solid #28cfff;
+}
+footer{color:#718b9b;font-size:12px;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<h1>J.A.R.V.I.S.</h1>
+<div class="status">● SYSTEM ONLINE</div>
+</header>
+
+<div class="circle">
+<div class="core">J</div>
+</div>
+
+<h2 id="time">00:00:00</h2>
+<p>PERSONAL AI ASSISTANT</p>
+
+<button onclick="listen()">🎙 ACTIVATE VOICE</button>
+<button onclick="speak('Hello. I am Jarvis. How can I help you?')">🔊 TEST VOICE</button>
+
+<div id="chat">
+<b>JARVIS:</b> Hello! System ready. 
+</div>
+
+<input id="message" placeholder="Talk to Jarvis...">
+<button onclick="send()">SEND</button>
+
+<footer>JARVIS AI • PERSONAL ASSISTANT</footer>
+
+<script>
+function clock(){
+ document.getElementById("time").innerText=
+ new Date().toLocaleTimeString();
+}
+setInterval(clock,1000);
+clock();
+
+function speak(text){
+ let voice=new SpeechSynthesisUtterance(text);
+ speechSynthesis.speak(voice);
+}
+
+function reply(text){
+ let answer="I am Jarvis. Your assistant is ready.";
+ let msg=text.toLowerCase();
+
+ if(msg.includes("hello")||msg.includes("hi"))
+ answer="Hello! How can I help you?";
+ else if(msg.includes("time"))
+ answer="The time is "+new Date().toLocaleTimeString();
+ else if(msg.includes("your name"))
+ answer="I am Jarvis, your personal AI assistant.";
+ else if(msg.includes("how are you"))
+ answer="All systems are running normally.";
+ else if(msg.includes("date"))
+ answer="Today is "+new Date().toDateString();
+
+ document.getElementById("chat").innerHTML=
+ "<b>YOU:</b> "+text+"<br><br><b>JARVIS:</b> "+answer;
+ speak(answer);
+}
+
+function send(){
+ let input=document.getElementById("message");
+ if(!input.value.trim())return;
+ reply(input.value);
+ input.value="";
+}
+
+function listen(){
+ const Recognition=window.SpeechRecognition||
+ window.webkitSpeechRecognition;
+ if(!Recognition){
+ alert("Voice recognition is not supported in this browser.");
+ return;
+ }
+ let recognition=new Recognition();
+ recognition.lang="en-IN";
+ recognition.onresult=function(event){
+ let text=event.results[0][0].transcript;
+ reply(text);
+ };
+ recognition.start();
+}
+</script>
+</body>
+</html>
