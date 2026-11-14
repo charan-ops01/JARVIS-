@@ -1,6 +1,6 @@
 # JARVIS-
 MY PERSONAL AI ASSISTANT INSPIRED BY IRON MAN
-J.A.R.V.I.S. AI
+FRIDAY AI
 
 Just A Rather Very Intelligent System
 
@@ -8,7 +8,7 @@ An advanced personal AI assistant inspired by Iron Man's JARVIS and FRIDAY.
 
 About
 
-JARVIS is a personal AI assistant project designed to make everyday interactions smarter and easier.
+FRIDAY is a personal AI assistant project designed to make everyday interactions smarter and easier.
 
 Features
 
@@ -29,6 +29,6 @@ Currently in development.
 
 Project Name
 
-J.A.R.V.I.S. AI
+FRIDAY AI
 
 The future starts here.
